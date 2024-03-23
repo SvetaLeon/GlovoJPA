@@ -56,7 +56,7 @@ class IntegrationTest {
                 url,
                 HttpMethod.POST,
                 request,
-                new ParameterizedTypeReference<ApiResponse<OrderDto>>() {
+                new ParameterizedTypeReference<>() {
                 });
         ApiResponse<OrderDto> responseBody = response.getBody();
 
@@ -73,7 +73,7 @@ class IntegrationTest {
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponse<OrderDto>>() {
+                new ParameterizedTypeReference<>() {
                 });
         ApiResponse<OrderDto> responseBody = response.getBody();
 
@@ -97,7 +97,7 @@ class IntegrationTest {
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponse<List<OrderDto>>>() {
+                new ParameterizedTypeReference<>() {
                 });
         ApiResponse<List<OrderDto>> responseBody = response.getBody();
 
@@ -121,7 +121,7 @@ class IntegrationTest {
                 url,
                 HttpMethod.PUT,
                 requestEntity,
-                new ParameterizedTypeReference<ApiResponse<OrderDto>>() {
+                new ParameterizedTypeReference<>() {
                 }
         );
         ApiResponse<OrderDto> responseBody = response.getBody();
@@ -140,7 +140,7 @@ class IntegrationTest {
                 url,
                 HttpMethod.DELETE,
                 null,
-                new ParameterizedTypeReference<ApiResponse<OrderDto>>() {
+                new ParameterizedTypeReference<>() {
                 }
         );
 
