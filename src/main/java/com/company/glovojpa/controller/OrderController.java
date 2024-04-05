@@ -4,6 +4,7 @@ import com.company.glovojpa.controller.response.ApiResponse;
 import com.company.glovojpa.dto.OrderDto;
 import com.company.glovojpa.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
 public class OrderController {
@@ -38,6 +40,7 @@ public class OrderController {
             List<OrderDto> result = orderService.getOrders(pageable);
             return ResponseEntity.ok(new ApiResponse<>(true, result, Collections.emptyList()));
         } catch (Exception e) {
+            log.error("Failed to retrieve orders", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to retrieve orders")));
         }
@@ -54,6 +57,7 @@ public class OrderController {
                         Collections.singletonList("Order not found")));
             }
         } catch (Exception e) {
+            log.error("Failed to retrieve order with ID: {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to retrieve order")));
         }
@@ -66,6 +70,7 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, null,
                     Collections.singletonList("Order created")));
         } catch (Exception e) {
+            log.error("Failed to create order", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to create order")));
         }
@@ -77,6 +82,7 @@ public class OrderController {
             orderService.updateOrder(id, dto);
             return ResponseEntity.ok(new ApiResponse<>(true, null, Collections.singletonList("Order updated")));
         } catch (Exception e) {
+            log.error("Failed to update order", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to update order")));
         }
@@ -88,6 +94,7 @@ public class OrderController {
             orderService.deleteOrder(id);
             return ResponseEntity.ok(new ApiResponse<>(true, null, Collections.singletonList("Order deleted")));
         } catch (Exception e) {
+            log.error("Failed to delete order with ID {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to delete order")));
         }
