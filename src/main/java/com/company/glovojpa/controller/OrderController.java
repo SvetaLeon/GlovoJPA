@@ -82,7 +82,7 @@ public class OrderController {
             orderService.updateOrder(id, dto);
             return ResponseEntity.ok(new ApiResponse<>(true, null, Collections.singletonList("Order updated")));
         } catch (Exception e) {
-            log.error("Failed to update order", e);
+            log.error("Failed to update order with ID {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(false, null,
                     Collections.singletonList("Failed to update order")));
         }
